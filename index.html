@@ -1,276 +1,143 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Giới thiệu bản thân - Quyen</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ngọc Hằng ❤️ Đức Thành</title>
 
-<!-- SEO Metadata -->
-<meta name="description" content="Giới thiệu bản thân Quách Văn Quyền - Đam mê khám phá, yêu thích âm nhạc và cuộc sống chân thành.">
-<meta name="keywords" content="Giới thiệu, Quách Văn Quyền, Personal Website, Profile cá nhân">
-<meta name="author" content="Quách Văn Quyền">
+  <!-- SEO Metadata -->
+  <meta name="description" content="Ngọc Hằng ❤️ Đức Thành - Ước muốn giản dị, tìm người không làm trái tim tổn thương.">
+  <meta name="author" content="Ngọc Hằng và Đức Thành">
 
-<!-- Favicon -->
-<link rel="icon" href="https://i.imgur.com/g3Bbyeh.jpeg" type="image/jpeg">
+  <!-- Favicon -->
+  <link rel="icon" href="https://i.imgur.com/TcPL8jj.jpeg" type="image/jpeg">
 
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-902BEJDWQF"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-902BEJDWQF');
-</script>
-
-<style>
-/* CSS giữ nguyên đẹp */
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  background: linear-gradient(-45deg, #000000, #1a1a2e, #16213e, #0f3460);
-  background-size: 400% 400%;
-  animation: gradientBG 15s ease infinite;
-  color: #ffffff;
-  overflow-x: hidden;
-}
-@keyframes gradientBG {
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
-}
-.container {
-  max-width: 800px;
-  margin: auto;
-  padding: 40px 20px;
-  position: relative;
-  z-index: 2;
-}
-.section {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 40px;
-  box-shadow: 0 0 10px rgba(255,255,255,0.1);
-}
-.divider {
-  height: 1px;
-  background: rgba(255,255,255,0.3);
-  margin: 40px 0;
-}
-.avatar {
-  width: 120px;
-  border-radius: 50%;
-  margin: 0 auto 20px;
-  display: block;
-  box-shadow: 0 0 20px rgba(0,191,255,0.6);
-  transition: 0.5s;
-}
-.avatar:hover {
-  transform: scale(1.1) rotate(5deg);
-  box-shadow: 0 0 30px rgba(0, 191, 255, 1);
-}
-h1, h2 {
-  text-align: center;
-}
-h2 {
-  color: #00bfff;
-}
-ul {
-  list-style: none;
-  padding: 0;
-  line-height: 1.8;
-}
-strong {
-  color: #00bfff;
-}
-a {
-  color: #87cefa;
-  text-decoration: none;
-  transition: 0.3s;
-}
-a:hover {
-  color: #00ffff;
-  animation: bounce 1s infinite;
-  text-shadow: 0 0 5px #00ffff;
-}
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
-  40% {transform: translateY(-10px);}
-  60% {transform: translateY(-5px);}
-}
-#stars, #fireflies, #ripple-canvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-}
-#click-to-play {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0,0,0,0.7);
-  color: #00bfff;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-size: 16px;
-  z-index: 1000;
-  transition: opacity 0.5s ease;
-}
-</style>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+      font-family: Arial, sans-serif;
+      background: #000; /* nền đen */
+      color: white;
+    }
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 0;
+    }
+    .content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      top: 50%;
+      transform: translateY(-50%);
+      padding: 20px;
+    }
+    .avatar {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      box-shadow: 0 0 20px pink;
+      object-fit: cover;
+    }
+    h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+      color: #ff85a2;
+    }
+    p {
+      font-size: 18px;
+      margin: 5px 0;
+    }
+    #click-to-play {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0,0,0,0.7);
+      color: #ff85a2;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 16px;
+      z-index: 1000;
+      transition: opacity 0.5s ease;
+    }
+  </style>
 </head>
 
 <body>
-<canvas id="stars"></canvas>
-<canvas id="fireflies"></canvas>
-<canvas id="ripple-canvas"></canvas>
+<canvas id="heartCanvas"></canvas>
 
 <div id="click-to-play">Click or scroll to play music 🎵</div>
 
-<div class="container">
-  <img src="https://i.imgur.com/g3Bbyeh.jpeg" alt="Avatar" class="avatar">
-  <div class="typewriter">
-    <h1 id="typewriter-text"></h1>
-  </div>
-  <div class="divider"></div>
-
-  <div class="section">
-    <h2>QUACH VAN QUYEN</h2>
-    <ul>
-      <li><strong>Birthday:</strong> 26/12/2006</li>
-      <li><strong>Address:</strong> Wherever you want me to be</li>
-      <li><strong>Email:</strong> quachvanquyen261226@gmail.com</li>
-      <li><strong>Hobbies:</strong> Exploring unknown places, learning new things</li>
-      <li><strong>Facebook:</strong> <a href="https://www.facebook.com/share/15d1eqhSQF/?mibextid=wwXIfr" target="_blank">Connect with me</a></li>
-    </ul>
-  </div>
-
-  <div class="divider"></div>
-
-  <div class="section">
-    <h2>Personality</h2>
-    <p>I am a calm and reserved person. I don't talk much, but when I meet the right person and truly understand them, I open up, I joke, and I share my world with them.</p>
-  </div>
-
-  <div class="divider"></div>
-
-  <div class="section">
-    <h2>Passion</h2>
-    <p>Music has always been a companion in my life — especially sad songs, which seem to speak the words my heart sometimes can't.</p>
-  </div>
-
-  <div class="divider"></div>
-
-  <div class="section">
-    <h2>Future Direction</h2>
-    <p>At this moment, I have no clear direction for the future. I only know that I am entangled in a one-sided love, trying to find my way through it.</p>
-  </div>
-
-  <div class="divider"></div>
-
-  <div class="section">
-    <h2>My Love Story</h2>
-    <p>I am somewhat disappointed with love at the moment. Yet, I am grateful for it — grateful for having had the chance to know what it feels like to love someone wholeheartedly. I hope that someday, love will be kinder to me than it is now.</p>
-  </div>
-
-  <div class="divider"></div>
-
-  <div class="section">
-    <h2>Life Motto</h2>
-    <p><em>"I believe in kindness, loyalty, and perseverance."</em></p>
-  </div>
-
-  <!-- Nhạc YouTube: KHÔNG có start=33, tự điều khiển bằng JavaScript -->
-  <iframe id="youtube-music" src="https://www.youtube.com/embed/QIrs3hRL-4g?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=QIrs3hRL-4g" style="position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none;" frameborder="0" allow="autoplay"></iframe>
+<div class="content">
+  <img src="https://i.imgur.com/TcPL8jj.jpeg" alt="Avatar" class="avatar">
+  <h1>Ngọc Hằng ❤️ Đức Thành</h1>
+  <p><strong>Email:</strong> hangthanh20092024@gmail.com</p>
+  <p><em>"Thay vì muốn gặp một người thật sự hoàn hảo, tôi chỉ muốn gặp người không làm trái tim tôi tổn thương một lần nữa."</em></p>
 </div>
 
+<!-- Nhạc nền Youtube -->
+<iframe id="youtube-music" src="https://www.youtube.com/embed/OqdA6DKV1Fs?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=OqdA6DKV1Fs" style="position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none;" frameborder="0" allow="autoplay"></iframe>
+
 <script>
-// Code hiệu ứng như cũ (typewriter, stars, fireflies, ripple) -- giữ nguyên
-const text = "Hello, my name is Quyen";
-let index = 0;
-function typeWriter() {
-  if (index < text.length) {
-    document.getElementById("typewriter-text").innerHTML += text.charAt(index);
-    index++;
-    setTimeout(typeWriter, 100);
+// Heart particles
+const canvas = document.getElementById('heartCanvas');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+function createHeartParticles() {
+  particles = [];
+  const numParticles = 600;
+  for (let i = 0; i < numParticles; i++) {
+    const t = Math.random() * Math.PI * 2;
+    const r = 20 * (1 - Math.sin(t)) * (1 - Math.sin(t));
+    const x = r * Math.cos(t);
+    const y = r * Math.sin(t);
+
+    particles.push({
+      x: canvas.width/2 + x * 8,
+      y: canvas.height/2 - y * 8,
+      size: Math.random() * 2 + 1,
+      dx: (Math.random() - 0.5) * 0.5,
+      dy: (Math.random() - 0.5) * 0.5
+    });
   }
 }
-typeWriter();
 
-// Bầu trời sao + đom đóm + ripple effect (copy nguyên y cũ)
-
-const stars = document.getElementById('stars').getContext('2d');
-stars.canvas.width = window.innerWidth;
-stars.canvas.height = window.innerHeight;
-let starArray = [];
-for (let i = 0; i < 150; i++) {
-  starArray.push({x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight, size: Math.random() * 2, speed: Math.random() * 0.5});
-}
-function drawStars() {
-  stars.clearRect(0, 0, stars.canvas.width, stars.canvas.height);
-  stars.fillStyle = '#fff';
-  for (let s of starArray) {
-    stars.beginPath();
-    stars.arc(s.x, s.y, s.size, 0, Math.PI * 2);
-    stars.fill();
-    s.x += s.speed;
-    if (s.x > window.innerWidth) s.x = 0;
+function drawParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = 'pink';
+  for (let p of particles) {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fill();
+    p.x += p.dx;
+    p.y += p.dy;
   }
-  requestAnimationFrame(drawStars);
+  requestAnimationFrame(drawParticles);
 }
-drawStars();
 
-const fireflies = document.getElementById('fireflies').getContext('2d');
-fireflies.canvas.width = window.innerWidth;
-fireflies.canvas.height = window.innerHeight;
-let flies = [];
-for (let i = 0; i < 50; i++) {
-  flies.push({x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight, size: Math.random() * 3 + 1, dx: Math.random() * 2 - 1, dy: Math.random() * 2 - 1});
-}
-function drawFireflies() {
-  fireflies.clearRect(0, 0, fireflies.canvas.width, fireflies.canvas.height);
-  fireflies.fillStyle = 'rgba(255,255,200,0.7)';
-  for (let f of flies) {
-    fireflies.beginPath();
-    fireflies.arc(f.x, f.y, f.size, 0, Math.PI * 2);
-    fireflies.fill();
-    f.x += f.dx;
-    f.y += f.dy;
-    if (f.x < 0 || f.x > window.innerWidth) f.dx *= -1;
-    if (f.y < 0 || f.y > window.innerHeight) f.dy *= -1;
-  }
-  requestAnimationFrame(drawFireflies);
-}
-drawFireflies();
+createHeartParticles();
+drawParticles();
 
-const rippleCanvas = document.getElementById('ripple-canvas');
-const rippleCtx = rippleCanvas.getContext('2d');
-rippleCanvas.width = window.innerWidth;
-rippleCanvas.height = window.innerHeight;
-let ripples = [];
-document.addEventListener('click', e => {
-  ripples.push({x: e.clientX, y: e.clientY, r: 0});
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  createHeartParticles();
 });
-function drawRipples() {
-  rippleCtx.clearRect(0, 0, rippleCanvas.width, rippleCanvas.height);
-  rippleCtx.strokeStyle = 'rgba(0,191,255,0.5)';
-  for (let r of ripples) {
-    rippleCtx.beginPath();
-    rippleCtx.arc(r.x, r.y, r.r, 0, Math.PI * 2);
-    rippleCtx.stroke();
-    r.r += 2;
-    if (r.r > 200) ripples.splice(ripples.indexOf(r), 1);
-  }
-  requestAnimationFrame(drawRipples);
-}
-drawRipples();
 
-// Youtube Player
+// Music control
 let musicPlayer;
 let musicReady = false;
+
 function onYouTubeIframeAPIReady() {
   musicPlayer = new YT.Player('youtube-music', {
     events: {
@@ -280,6 +147,7 @@ function onYouTubeIframeAPIReady() {
     }
   });
 }
+
 var tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
 var firstScriptTag = document.getElementsByTagName('script')[0];
@@ -287,13 +155,11 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 function playMusicOnce() {
   if (musicReady) {
-    musicPlayer.seekTo(33, true); // CHÍNH XÁC: Seek tới 33 giây
     musicPlayer.unMute();
     musicPlayer.setVolume(50);
     const clickToPlay = document.getElementById('click-to-play');
     clickToPlay.style.opacity = '0';
     setTimeout(() => clickToPlay.style.display = 'none', 500);
-
     document.body.removeEventListener('click', playMusicOnce);
     document.body.removeEventListener('touchstart', playMusicOnce);
     document.body.removeEventListener('wheel', playMusicOnce);
