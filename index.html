@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ngọc Hằng ❤️ Đức Thành</title>
 
   <!-- SEO Metadata -->
-  <meta name="description" content="Ngọc Hằng ❤️ Đức Thành - Ước muốn giản dị, tìm người không làm trái tim tổn thương.">
-  <meta name="author" content="Ngọc Hằng và Đức Thành">
+  <meta name="description" content="Ngọc Hằng ❤️ Đức Thành - A simple wish: to meet someone who won't break my heart.">
+  <meta name="author" content="Ngọc Hằng and Đức Thành">
 
   <!-- Favicon -->
   <link rel="icon" href="https://i.imgur.com/TcPL8jj.jpeg" type="image/jpeg">
@@ -19,7 +19,7 @@
       height: 100%;
       overflow: hidden;
       font-family: Arial, sans-serif;
-      background: #000; /* nền đen */
+      background: black;
       color: white;
     }
     canvas {
@@ -78,63 +78,57 @@
   <img src="https://i.imgur.com/TcPL8jj.jpeg" alt="Avatar" class="avatar">
   <h1>Ngọc Hằng ❤️ Đức Thành</h1>
   <p><strong>Email:</strong> hangthanh20092024@gmail.com</p>
-  <p><em>"Thay vì muốn gặp một người thật sự hoàn hảo, tôi chỉ muốn gặp người không làm trái tim tôi tổn thương một lần nữa."</em></p>
+  <p><strong>Date of Birth:</strong> September 20, 2024</p>
+  <p><em>"Instead of meeting a perfect person, I just wish to meet someone who won't hurt my heart again."</em></p>
 </div>
 
-<!-- Nhạc nền Youtube -->
+<!-- YouTube Music Embed -->
 <iframe id="youtube-music" src="https://www.youtube.com/embed/OqdA6DKV1Fs?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=OqdA6DKV1Fs" style="position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none;" frameborder="0" allow="autoplay"></iframe>
 
 <script>
-// Heart particles
+// Trái tim đập thình thịch
 const canvas = document.getElementById('heartCanvas');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let particles = [];
-
-function createHeartParticles() {
-  particles = [];
-  const numParticles = 600;
-  for (let i = 0; i < numParticles; i++) {
-    const t = Math.random() * Math.PI * 2;
-    const r = 20 * (1 - Math.sin(t)) * (1 - Math.sin(t));
-    const x = r * Math.cos(t);
-    const y = r * Math.sin(t);
-
-    particles.push({
-      x: canvas.width/2 + x * 8,
-      y: canvas.height/2 - y * 8,
-      size: Math.random() * 2 + 1,
-      dx: (Math.random() - 0.5) * 0.5,
-      dy: (Math.random() - 0.5) * 0.5
-    });
-  }
+function heartFunction(t) {
+  return {
+    x: 16 * Math.pow(Math.sin(t), 3),
+    y: -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t))
+  };
 }
 
-function drawParticles() {
+function drawHeart(scale) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = 'pink';
-  for (let p of particles) {
-    ctx.beginPath();
-    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-    ctx.fill();
-    p.x += p.dx;
-    p.y += p.dy;
+  ctx.beginPath();
+  for (let i = 0; i < Math.PI * 2; i += 0.01) {
+    const p = heartFunction(i);
+    const x = canvas.width / 2 + p.x * scale;
+    const y = canvas.height / 2 + p.y * scale;
+    if (i === 0) ctx.moveTo(x, y);
+    else ctx.lineTo(x, y);
   }
-  requestAnimationFrame(drawParticles);
+  ctx.fillStyle = 'pink';
+  ctx.fill();
 }
 
-createHeartParticles();
-drawParticles();
+let time = 0;
+function animate() {
+  requestAnimationFrame(animate);
+  time += 0.05;
+  const scale = 10 + Math.sin(time) * 2;
+  drawHeart(scale);
+}
+
+animate();
 
 window.addEventListener('resize', () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-  createHeartParticles();
 });
 
-// Music control
+// YouTube Music Control
 let musicPlayer;
 let musicReady = false;
 
