@@ -71,6 +71,7 @@
 
 <body>
 <canvas id="meteorCanvas"></canvas>
+<canvas id="dustCanvas"></canvas>
 
 <div id="click-to-play">Click or scroll to play music 🎵</div>
 
@@ -87,17 +88,17 @@
 
 <script>
 // Meteor shower effect
-const canvas = document.getElementById('meteorCanvas');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+const meteorCanvas = document.getElementById('meteorCanvas');
+const meteorCtx = meteorCanvas.getContext('2d');
+meteorCanvas.width = window.innerWidth;
+meteorCanvas.height = window.innerHeight;
 
 let meteors = [];
 
 function createMeteor() {
   return {
-    x: Math.random() * canvas.width,
-    y: Math.random() * -canvas.height,
+    x: Math.random() * meteorCanvas.width,
+    y: Math.random() * -meteorCanvas.height,
     length: Math.random() * 80 + 20,
     speed: Math.random() * 4 + 2,
     angle: Math.PI / 4,
@@ -105,31 +106,27 @@ function createMeteor() {
   };
 }
 
-for (let i = 0; i < 50; i++) {
+for (let i = 0; i < 30; i++) {
   meteors.push(createMeteor());
 }
 
 function drawMeteors() {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "rgba(0,0,0,0.2)";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  
-  ctx.strokeStyle = "rgba(173,216,230,0.8)";
-  ctx.lineWidth = 2;
-  ctx.lineCap = "round";
+  meteorCtx.clearRect(0, 0, meteorCanvas.width, meteorCanvas.height);
   
   meteors.forEach(meteor => {
-    ctx.beginPath();
-    ctx.moveTo(meteor.x, meteor.y);
-    ctx.lineTo(meteor.x - meteor.length * Math.cos(meteor.angle), meteor.y - meteor.length * Math.sin(meteor.angle));
-    ctx.stroke();
+    meteorCtx.beginPath();
+    meteorCtx.moveTo(meteor.x, meteor.y);
+    meteorCtx.lineTo(meteor.x - meteor.length * Math.cos(meteor.angle), meteor.y - meteor.length * Math.sin(meteor.angle));
+    meteorCtx.strokeStyle = `rgba(173, 216, 230, ${meteor.alpha})`;
+    meteorCtx.lineWidth = 2;
+    meteorCtx.stroke();
     
     meteor.x += meteor.speed * Math.cos(meteor.angle);
     meteor.y += meteor.speed * Math.sin(meteor.angle);
     
-    if (meteor.x > canvas.width || meteor.y > canvas.height) {
+    if (meteor.x > meteorCanvas.width || meteor.y > meteorCanvas.height) {
       Object.assign(meteor, createMeteor());
-      meteor.x = Math.random() * canvas.width;
+      meteor.x = Math.random() * meteorCanvas.width;
       meteor.y = 0;
     }
   });
@@ -140,8 +137,58 @@ function drawMeteors() {
 drawMeteors();
 
 window.addEventListener('resize', () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  meteorCanvas.width = window.innerWidth;
+  meteorCanvas.height = window.innerHeight;
+});
+
+// Dust particles effect
+const dustCanvas = document.getElementById('dustCanvas');
+const dustCtx = dustCanvas.getContext('2d');
+dustCanvas.width = window.innerWidth;
+dustCanvas.height = window.innerHeight;
+
+let dusts = [];
+
+function createDust() {
+  return {
+    x: Math.random() * dustCanvas.width,
+    y: Math.random() * dustCanvas.height,
+    radius: Math.random() * 1.5 + 0.5,
+    alpha: Math.random() * 0.5 + 0.2,
+    dx: (Math.random() - 0.5) * 0.2,
+    dy: (Math.random() - 0.5) * 0.2
+  };
+}
+
+for (let i = 0; i < 150; i++) {
+  dusts.push(createDust());
+}
+
+function drawDusts() {
+  dustCtx.clearRect(0, 0, dustCanvas.width, dustCanvas.height);
+  
+  dusts.forEach(dust => {
+    dustCtx.beginPath();
+    dustCtx.arc(dust.x, dust.y, dust.radius, 0, Math.PI * 2);
+    dustCtx.fillStyle = `rgba(200, 160, 255, ${dust.alpha})`;
+    dustCtx.fill();
+    
+    dust.x += dust.dx;
+    dust.y += dust.dy;
+    
+    if (dust.x < 0 || dust.x > dustCanvas.width || dust.y < 0 || dust.y > dustCanvas.height) {
+      Object.assign(dust, createDust());
+    }
+  });
+  
+  requestAnimationFrame(drawDusts);
+}
+
+drawDusts();
+
+window.addEventListener('resize', () => {
+  dustCanvas.width = window.innerWidth;
+  dustCanvas.height = window.innerHeight;
 });
 
 // YouTube Music Control
