@@ -86,46 +86,53 @@
 <iframe id="youtube-music" src="https://www.youtube.com/embed/OqdA6DKV1Fs?enablejsapi=1&autoplay=1&mute=1&loop=1&playlist=OqdA6DKV1Fs" style="position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none;" frameborder="0" allow="autoplay"></iframe>
 
 <script>
-// Trái tim đập thình thịch
+// Heart particles
 const canvas = document.getElementById('heartCanvas');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-function heartFunction(t) {
-  return {
-    x: 16 * Math.pow(Math.sin(t), 3),
-    y: -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t))
-  };
-}
+let particles = [];
 
-function drawHeart(scale) {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  ctx.beginPath();
-  for (let i = 0; i < Math.PI * 2; i += 0.01) {
-    const p = heartFunction(i);
-    const x = canvas.width / 2 + p.x * scale;
-    const y = canvas.height / 2 + p.y * scale;
-    if (i === 0) ctx.moveTo(x, y);
-    else ctx.lineTo(x, y);
+function createHeartParticles() {
+  particles = [];
+  const numParticles = 600;
+  for (let i = 0; i < numParticles; i++) {
+    const t = Math.random() * Math.PI * 2;
+    const r = 20 * (1 - Math.sin(t)) * (1 - Math.sin(t));
+    const x = r * Math.cos(t);
+    const y = r * Math.sin(t);
+
+    particles.push({
+      x: canvas.width/2 + x * 8,
+      y: canvas.height/2 - y * 8,
+      size: Math.random() * 2 + 1,
+      dx: (Math.random() - 0.5) * 0.5,
+      dy: (Math.random() - 0.5) * 0.5
+    });
   }
+}
+
+function drawParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.fillStyle = 'pink';
-  ctx.fill();
+  for (let p of particles) {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+    ctx.fill();
+    p.x += p.dx;
+    p.y += p.dy;
+  }
+  requestAnimationFrame(drawParticles);
 }
 
-let time = 0;
-function animate() {
-  requestAnimationFrame(animate);
-  time += 0.05;
-  const scale = 10 + Math.sin(time) * 2;
-  drawHeart(scale);
-}
-
-animate();
+createHeartParticles();
+drawParticles();
 
 window.addEventListener('resize', () => {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
+  createHeartParticles();
 });
 
 // YouTube Music Control
